@@ -13,10 +13,10 @@
 </@block>
 
 <@block name="baseCss">
-    <link id="callCss" rel="stylesheet" href="/css/base/bootstrap.min.css" type="text/css"
+    <link id="callCss" rel="stylesheet" href="../css/base/bootstrap.min.css" type="text/css"
           media="screen" charset="utf-8"/>
 
-    <link id="callCss" rel="stylesheet" href="/css/base/style.css" type="text/css" media="screen"
+    <link id="callCss" rel="stylesheet" href="../css/base/style.css" type="text/css" media="screen"
           charset="utf-8"/>
 </@block>
 </head>

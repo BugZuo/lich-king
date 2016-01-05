@@ -23,7 +23,8 @@
     <!-- 默认处理servlet -->
     <mvc:default-servlet-handler />
 
-    <mvc:resources mapping="/**" location="/WEB-INF/static/"/>
+    <mvc:resources mapping="/**" location="${static.path}"/>
+    <!--<mvc:resources mapping="/**" location="/WEB-INF/static"/>-->
 
     <!-- 启用注解驱动 -->
     <mvc:annotation-driven />

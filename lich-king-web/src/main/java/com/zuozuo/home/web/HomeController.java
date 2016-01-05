@@ -19,4 +19,9 @@ public class HomeController {
   public String upload() {
     return "home/upload";
   }
+
+  @RequestMapping(value = "login/", method = RequestMethod.GET)
+  public String login() {
+    return "home/login";
+  }
 }
