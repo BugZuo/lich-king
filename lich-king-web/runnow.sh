@@ -24,6 +24,6 @@ do
     esac
 done
 
-set MAVEN_OPTS="-Xmx128M -Xms64M"  # 传递给JVM的参数
+export MAVEN_OPTS="-Xmx128m -Xms64m"  # 传递给JVM的参数
 mvn clean
 $mvnexe jetty:run-exploded -P $prof -Djetty.port=$port
