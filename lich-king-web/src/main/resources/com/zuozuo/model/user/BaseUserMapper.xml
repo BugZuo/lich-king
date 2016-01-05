@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zuozuo.model.user.BaseUser">
+    <resultMap id="BaseUserResult" type="com.zuozuo.model.user.BaseUser">
+        <id property="id" column="id" javaType="long" />
+        <result property="username" column="username" javaType="String" />
+        <result property="firstName" column="first_name" javaType="String" />
+        <result property="lastName" column="last_name" javaType="String" />
+        <result property="email" column="email" javaType="String" />
+        <result property="telephone" column="telephone" javaType="String" />
+        <result property="password" column="password" javaType="String" />
+        <result property="isStaff" column="is_staff" javaType="boolean" />
+        <result property="isActive" column="is_active" javaType="boolean" />
+        <result property="isSuperUser" column="is_superuser" javaType="boolean" />
+        <result property="lastLoginTime" column="last_login_time" javaType="java.util.Date" />
+        <result property="createdAt" column="created_at" javaType="java.util.Date" />
+        <result property="status" column="status" javaType="int" />
+    </resultMap>
+
+    <sql id="BASE_COLUMNS">
+        id,
+        username,
+        first_name,
+        last_name,
+        email,
+        telephone,
+        password,
+        is_staff,
+        is_active,
+        is_superuser,
+        last_login_time,
+        created_at,
+        status
+    </sql>
+    
+    <select id="getById" parameterType="long" resultMap="BaseUserResult">
+        SELECT <include refid="BASE_COLUMNS" />
+        <![CDATA[
+          FROM user
+          WHERE id = #{id}
+        ]]>
+    </select>
+
+    <select id="getByUsername" parameterType="String" resultMap="BaseUserResult">
+        SELECT <include refid="BASE_COLUMNS" />
+        <![CDATA[
+            FROM user
+            WHERE username = #{username}
+        ]]>
+    </select>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/task
+            http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+    <!-- 内容扫描路径 -->
+    <!--<context:property-placeholder location="/WEB-INF/*.properties" />-->
+    <context:component-scan base-package="com.zuozuo" />
+
+    <!--<bean id="test" class="com.zuozuo.home.MainController" />-->
+    <!--<context:annotation-config />-->
+
+    <!-- 默认处理servlet -->
+    <mvc:default-servlet-handler />
+
+    <mvc:resources mapping="/**" location="/WEB-INF/static/"/>
+
+    <!-- 启用注解驱动 -->
+    <mvc:annotation-driven />
+
+    <!-- 开启这个配置，spring才能识别@Scheduled注解 -->
+    <task:annotation-driven/>
+
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="prefix" value="/WEB-INF/"/>-->
+        <!--<property name="suffix" value=".jsp" />-->
+        <!--<property name="order" value="1" />  &lt;!&ndash; 优先级 0最大&ndash;&gt;-->
+    <!--</bean>-->
+
+    <bean id="overrideDirective" class="com.zuozuo.freemarker.OverrideDirective" />
+    <bean id="blockDirective" class="com.zuozuo.freemarker.BlockDirective" />
+    <bean id="extendsDirective" class="com.zuozuo.freemarker.ExtendsDirective" />
+    <bean id="superDirective" class="com.zuozuo.freemarker.SuperDirective" />
+
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!--<property name="defaultEncoding" value="UTF-8" />-->
+        <property name="templateLoaderPath" value="${tmplate.path}" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="template_update_delay">60000</prop> <!-- 模板检查更新延迟 -->
+                <prop key="classic_compatible">true</prop>
+                <prop key="number_format">##.#</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="fmXmlEscape" value-ref="xmlEscape" />
+                <entry key="block" value-ref="blockDirective" />
+                <entry key="override" value-ref="overrideDirective" />
+                <entry key="extends" value-ref="extendsDirective" />
+                <entry key="super" value-ref="superDirective" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="xmlEscape" class="freemarker.template.utility.XmlEscape" />
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="order" value="0" />
+        <property name="attributesMap">
+            <map>
+                <entry key="staticPrefix"><bean class="com.zuozuo.freemarker.StaticPrefixMarco" /></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="SpringUtil" class="com.zuozuo.common.SpringUtil" />
+</beans>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="APP_NAME" value="lich-king" />
+    <property name="log_dir" value="/zuozuo/logs/lich-king" />
+
+    <contextName>${APP_NAME}</contextName>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder 默认配置为PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="main" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_dir}/main.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/main.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <maxHistory>6</maxHistory>
+    </appender>
+
+    <logger name="com.zuozuo" level="INFO" additivity="false">
+        <appender-ref ref="main" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
