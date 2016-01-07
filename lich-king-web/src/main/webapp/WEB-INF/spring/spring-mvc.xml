@@ -26,8 +26,20 @@
     <mvc:resources mapping="/**" location="${static.path}"/>
     <!--<mvc:resources mapping="/**" location="/WEB-INF/static"/>-->
 
+    <bean id="mvnObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+        <property name="serializationInclusion">
+            <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+        </property>
+    </bean>
+
     <!-- 启用注解驱动 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven enable-matrix-variables="true">
+        <mvc:message-converters register-defaults="true"> <!-- json序列化配置 -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="mvnObjectMapper" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 开启这个配置，spring才能识别@Scheduled注解 -->
     <task:annotation-driven/>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="cache" class="com.zuozuo.data.Xmemcached">
+        <constructor-arg name="url" value="115.28.235.26:11211" />
+        <constructor-arg name="defaultTTL" value="86400" />
+    </bean>
+
+    <bean id="memcachedClient"
+          class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">
+        <property name="servers" value="115.28.235.26:11211" />
+    </bean>
+</beans>
