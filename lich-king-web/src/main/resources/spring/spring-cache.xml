@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+    <bean id="cache" class="com.zuozuo.data.Xmemcached">
+        <constructor-arg name="url" value="115.28.235.26:11211" />
+        <constructor-arg name="defaultTTL" value="86400" />
+    </bean>
+
+    <!-- 直接使用client -->
+    <!--<bean id="memcachedClient"-->
+          <!--class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">-->
+        <!--<property name="servers" value="115.28.235.26:11211" />-->
+    <!--</bean>-->
+
+    <!-- redis config 可应用于session信息的存储, 缓存, 计数信息 -->
+    <bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="30" />
+        <property name="maxIdle" value="10" />
+        <property name="maxWaitMillis" value="3000" />
+        <!--<property name="testOnBorrow" value="false" />  &lt;!&ndash; for twemproxy &ndash;&gt;-->
+        <!--<property name="testWhileIdle" value="false" />   &lt;!&ndash; for twemproxy &ndash;&gt;-->
+    </bean>
+
+    <bean id="redisFactoryForSession"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="${redis.session.server}" p:port="${redis.session.port}" p:database="0"
+          p:use-pool="true">
+        <property name="poolConfig" ref="redisPoolConfig" />
+    </bean>
+    <bean id="sessionCli" class="org.springframework.data.redis.core.StringRedisTemplate"
+          p:connection-factory-ref="redisFactoryForSession" />
+</beans>

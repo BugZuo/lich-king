@@ -1,4 +1,4 @@
-package com.zuozuo.convertor.user;
+package com.zuozuo.converter.user;
 
 import com.zuozuo.dto.user.ApiBasicUserDTO;
 import com.zuozuo.model.user.BaseUser;

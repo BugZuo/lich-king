@@ -1,4 +1,4 @@
-package com.zuozuo.home;
+package com.zuozuo.views.home;
 
 import com.zuozuo.model.user.BaseUser;
 import com.zuozuo.service.cache.ICacheService;

@@ -1,4 +1,4 @@
-package com.zuozuo.home.api;
+package com.zuozuo.views.home.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zuozuo.base.APIStatus;
 import com.zuozuo.base.StandardResponseAPI;
-import com.zuozuo.convertor.user.UserDTOConverter;
+import com.zuozuo.converter.user.UserDTOConverter;
 import com.zuozuo.forms.LoginForm;
 import com.zuozuo.service.user.IUserCoreService;
 import com.zuozuo.service.user.LoginInfo;

@@ -7,12 +7,13 @@
         <groupId>com.zuozuo</groupId>
         <artifactId>lich-king</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
+
     <artifactId>lich-king-web</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>lich-king-web Maven Webapp</name>
+    <name>lich-king-web</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>
@@ -89,10 +90,20 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.googlecode.xmemcached</groupId>
             <artifactId>xmemcached</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <type>jar</type>
         </dependency>
 
         <dependency>
@@ -144,28 +155,27 @@
                         <!--</includes>-->
                         <!--<targetPath>WEB-INF/templates</targetPath>-->
                         <!--</resource>-->
+                        <!--<resource>-->
+                            <!--<directory>src/main/webapp/WEB-INF</directory>-->
+                            <!--<filtering>true</filtering>-->
+                            <!--<excludes>-->
+                                <!--<exclude>templates/**</exclude>-->
+                                <!--<exclude>static/**</exclude>-->
+                            <!--</excludes>-->
+                            <!--<includes>-->
+                                <!--<include>**</include>-->
+                            <!--</includes>-->
+                            <!--<targetPath>WEB-INF</targetPath>-->
+                        <!--</resource>-->
                         <resource>
-                            <directory>src/main/webapp/WEB-INF</directory>
-                            <filtering>true</filtering>
-                            <excludes>
-                                <exclude>templates/**</exclude>
-                                <exclude>static/**</exclude>
-                            </excludes>
+                            <directory>src/main/resources</directory>
+                            <filtering>true</filtering> <!-- 替换字段 -->
                             <includes>
-                                <include>**</include>
+                                <include>**/*</include>
                             </includes>
-                            <targetPath>WEB-INF</targetPath>
+                            <targetPath>classpath:</targetPath>
                         </resource>
                     </webResources>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,4 +1,4 @@
-package com.zuozuo.home.api;
+package com.zuozuo.views.home.api;
 
 import com.zuozuo.common.SpringUtil;
 
