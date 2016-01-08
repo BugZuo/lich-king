@@ -169,11 +169,10 @@
                         <!--</resource>-->
                         <resource>
                             <directory>src/main/resources</directory>
-                            <filtering>true</filtering> <!-- 替换字段 -->
                             <includes>
-                                <include>**/*</include>
+                                <include>**/*.xml</include>
                             </includes>
-                            <targetPath>classpath:</targetPath>
+                            <filtering>false</filtering> <!-- 替换字段 -->
                         </resource>
                     </webResources>
                 </configuration>
