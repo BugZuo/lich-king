@@ -15,4 +15,7 @@
           class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties" />
     </bean>
+
+    <!-- 公用的modelMapper -->
+    <bean id="commonModelMapper" class="org.modelmapper.ModelMapper" />
 </beans>

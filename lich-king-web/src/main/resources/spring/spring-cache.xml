@@ -27,10 +27,10 @@
 
     <bean id="redisFactoryForSession"
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:host-name="${redis.session.server}" p:port="${redis.session.port}" p:database="0"
-          p:use-pool="true">
+          p:hostName="${redis.session.server}" p:port="${redis.session.port}" p:database="0"
+          p:usePool="true">
         <property name="poolConfig" ref="redisPoolConfig" />
     </bean>
     <bean id="sessionCli" class="org.springframework.data.redis.core.StringRedisTemplate"
-          p:connection-factory-ref="redisFactoryForSession" />
+          p:connectionFactory-ref="redisFactoryForSession" />
 </beans>

@@ -13,6 +13,7 @@ public class BaseUser {
     private String email;
     private String telephone;
     private String password;
+    private String bindSite;
     private boolean isStaff;
     private boolean isActive;
     private boolean isSuperUser;
@@ -74,6 +75,14 @@ public class BaseUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getBindSite() {
+        return bindSite;
+    }
+
+    public void setBindSite(String bindSite) {
+        this.bindSite = bindSite;
     }
 
     public boolean isStaff() {

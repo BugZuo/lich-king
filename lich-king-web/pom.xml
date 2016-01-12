@@ -28,6 +28,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.zuozuo</groupId>
+            <artifactId>lich-king-common</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
@@ -40,6 +45,16 @@
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
         </dependency>
 
         <dependency>
@@ -130,9 +145,9 @@
     </dependencies>
 
     <build>
-        <filters>
-            <filter>${propertyDir}/misc.properties</filter>
-        </filters>
+        <!--<filters>-->
+            <!--<filter>${propertyDir}/misc.properties</filter>-->
+        <!--</filters>-->
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>

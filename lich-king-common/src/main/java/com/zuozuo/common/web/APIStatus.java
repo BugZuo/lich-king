@@ -1,7 +1,7 @@
-package com.zuozuo.base;
+package com.zuozuo.common.web;
 
 /**
- * Created by bug on 15/12/30.
+ * Created by bug on 16/1/11.
  */
 public enum APIStatus {
   SUCCESS(1),
@@ -18,4 +18,3 @@ public enum APIStatus {
     return this.value;
   }
 }
-

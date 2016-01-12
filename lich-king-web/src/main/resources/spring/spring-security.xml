@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <security:http entry-point-ref="auth" auto-config="false" disable-url-rewriting="true" use-expressions="true"
+               create-session="never">
+        <!--<security:intercept-url pattern="/shit/" access="denyAll" />-->
+        <security:custom-filter position="PRE_AUTH_FILTER" ref="sessionManager" />
+    </security:http>
+    <bean id="auth" class="com.zuozuo.common.security.LoginActionEntryPoint" p:loginUrl="/login/" />
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="authProvider"/>
+    </security:authentication-manager>
+
+    <bean id="authProvider"
+          class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+        <property name="preAuthenticatedUserDetailsService">
+            <bean class="com.zuozuo.common.security.AuthProvider" />
+        </property>
+    </bean>
+    <bean id="sessionManager" class="com.zuozuo.service.impl.user.SessionManagerImpl">
+        <property name="authenticationManager" ref="authenticationManager" />
+    </bean>
+</beans>

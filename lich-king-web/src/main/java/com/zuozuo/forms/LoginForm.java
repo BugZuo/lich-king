@@ -4,6 +4,7 @@ public class LoginForm {
   private String username;
   private String password;
   private String validateCode;
+  private boolean isRemeber;
 
   public void setUsername(String username) {
     this.username = username;
@@ -27,5 +28,13 @@ public class LoginForm {
 
   public void setValidateCode(String validateCode) {
     this.validateCode = validateCode;
+  }
+
+  public boolean isRemeber() {
+    return isRemeber;
+  }
+
+  public void setRemeber(boolean remeber) {
+    isRemeber = remeber;
   }
 }
