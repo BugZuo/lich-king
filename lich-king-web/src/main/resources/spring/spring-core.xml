@@ -7,15 +7,17 @@
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>file:#{T(com.zuozuo.common.SystemUtil).getConfDir("lich-king")}/application.properties</value>
+                <value>
+                    file:#{T(com.flyzfq.arthas.common.SystemUtil).getConfDir("lich-king")}/application.properties
+                </value>
             </list>
         </property>
     </bean>
     <bean id="propertyConfigure"
           class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
-        <property name="properties" ref="configProperties" />
+        <property name="properties" ref="configProperties"/>
     </bean>
 
     <!-- 公用的modelMapper -->
-    <bean id="commonModelMapper" class="org.modelmapper.ModelMapper" />
+    <bean id="commonModelMapper" class="org.modelmapper.ModelMapper"/>
 </beans>

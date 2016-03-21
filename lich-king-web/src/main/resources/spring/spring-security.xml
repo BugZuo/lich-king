@@ -8,12 +8,13 @@
                            http://www.springframework.org/schema/security
                            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <security:http entry-point-ref="auth" auto-config="false" disable-url-rewriting="true" use-expressions="true"
-               create-session="never">
+    <security:http entry-point-ref="auth" auto-config="false" disable-url-rewriting="true"
+                   use-expressions="true"
+                   create-session="never">
         <!--<security:intercept-url pattern="/shit/" access="denyAll" />-->
-        <security:custom-filter position="PRE_AUTH_FILTER" ref="sessionManager" />
+        <security:custom-filter position="PRE_AUTH_FILTER" ref="sessionManager"/>
     </security:http>
-    <bean id="auth" class="com.zuozuo.common.security.LoginActionEntryPoint" p:loginUrl="/login/" />
+    <bean id="auth" class="com.flyzfq.lich.biz.security.LoginActionEntryPoint" p:loginUrl="/login/"/>
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="authProvider"/>
@@ -22,10 +23,10 @@
     <bean id="authProvider"
           class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
         <property name="preAuthenticatedUserDetailsService">
-            <bean class="com.zuozuo.common.security.AuthProvider" />
+            <bean class="com.flyzfq.lich.biz.security.AuthProvider"/>
         </property>
     </bean>
-    <bean id="sessionManager" class="com.zuozuo.service.impl.user.SessionManagerImpl">
-        <property name="authenticationManager" ref="authenticationManager" />
+    <bean id="sessionManager" class="com.flyzfq.lich.biz.impl.user.SessionManagerImpl">
+        <property name="authenticationManager" ref="authenticationManager"/>
     </bean>
 </beans>

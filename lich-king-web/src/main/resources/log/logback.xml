@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <property name="APP_NAME" value="lich-king" />
-    <property name="log_dir" value="/zuozuo/logs/lich-king" />
+    <property name="APP_NAME" value="lich-king"/>
+    <property name="log_dir" value="/zuozuo/logs/lich-king"/>
 
     <contextName>${APP_NAME}</contextName>
 
@@ -23,12 +23,12 @@
         <maxHistory>6</maxHistory>
     </appender>
 
-    <logger name="com.zuozuo" level="INFO" additivity="false">
-        <appender-ref ref="main" />
+    <logger name="com.flyzfq" level="INFO" additivity="false">
+        <appender-ref ref="main"/>
     </logger>
 
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="main"/>
     </root>
 
 </configuration>

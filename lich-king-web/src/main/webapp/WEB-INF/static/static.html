@@ -1,1 +1,1 @@
-<div class="span3 logo"><a href="#"><img src="/img/base/logo1.png" alt="" /></a></div>
+<div class="span3 logo"><a href="#"><img src="/img/base/logo1.png" alt=""/></a></div>

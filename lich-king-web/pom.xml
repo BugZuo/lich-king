@@ -2,14 +2,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>com.zuozuo</groupId>
-        <artifactId>lich-king</artifactId>
+        <groupId>com.flyzfq</groupId>
+        <artifactId>flyzfq-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
-
     <artifactId>lich-king-web</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -18,18 +15,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.zuozuo</groupId>
+            <groupId>com.flyzfq</groupId>
             <artifactId>lich-king-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.zuozuo</groupId>
-            <artifactId>lich-king-util</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.zuozuo</groupId>
+            <groupId>com.flyzfq</groupId>
             <artifactId>lich-king-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.flyzfq</groupId>
+            <artifactId>Arthas</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -142,11 +142,21 @@
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <!--<filters>-->
-            <!--<filter>${propertyDir}/misc.properties</filter>-->
+        <!--<filter>${propertyDir}/misc.properties</filter>-->
         <!--</filters>-->
         <plugins>
             <plugin>
@@ -155,6 +165,25 @@
                 <configuration>
                     <jettyConfig>src/main/webapp/WEB-INF/jetty.xml</jettyConfig>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <configLocation>../google_checks_own.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>checkstyle</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -171,16 +200,16 @@
                         <!--<targetPath>WEB-INF/templates</targetPath>-->
                         <!--</resource>-->
                         <!--<resource>-->
-                            <!--<directory>src/main/webapp/WEB-INF</directory>-->
-                            <!--<filtering>true</filtering>-->
-                            <!--<excludes>-->
-                                <!--<exclude>templates/**</exclude>-->
-                                <!--<exclude>static/**</exclude>-->
-                            <!--</excludes>-->
-                            <!--<includes>-->
-                                <!--<include>**</include>-->
-                            <!--</includes>-->
-                            <!--<targetPath>WEB-INF</targetPath>-->
+                        <!--<directory>src/main/webapp/WEB-INF</directory>-->
+                        <!--<filtering>true</filtering>-->
+                        <!--<excludes>-->
+                        <!--<exclude>templates/**</exclude>-->
+                        <!--<exclude>static/**</exclude>-->
+                        <!--</excludes>-->
+                        <!--<includes>-->
+                        <!--<include>**</include>-->
+                        <!--</includes>-->
+                        <!--<targetPath>WEB-INF</targetPath>-->
                         <!--</resource>-->
                         <resource>
                             <directory>src/main/resources</directory>

@@ -5,22 +5,23 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        ">
-    <bean id="cache" class="com.zuozuo.data.Xmemcached">
-        <constructor-arg name="url" value="115.28.235.26:11211" />
-        <constructor-arg name="defaultTTL" value="86400" />
+    <bean id="cache" class="com.flyzfq.lich.common.data.Xmemcached">
+        <constructor-arg name="url" value="115.28.235.26:11211"/>
+        <constructor-arg name="defaultTTL" value="86400"/>
     </bean>
 
     <!-- 直接使用client -->
     <!--<bean id="memcachedClient"-->
-          <!--class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">-->
-        <!--<property name="servers" value="115.28.235.26:11211" />-->
+    <!--class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">-->
+    <!--<property name="servers" value="115.28.235.26:11211" />-->
     <!--</bean>-->
 
     <!-- redis config 可应用于session信息的存储, 缓存, 计数信息 -->
     <bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="30" />
-        <property name="maxIdle" value="10" />
-        <property name="maxWaitMillis" value="3000" />
+        <property name="maxTotal" value="10"/>
+        <property name="maxIdle" value="50"/>
+        <property name="minIdle" value="3" />
+        <property name="maxWaitMillis" value="3000"/>
         <!--<property name="testOnBorrow" value="false" />  &lt;!&ndash; for twemproxy &ndash;&gt;-->
         <!--<property name="testWhileIdle" value="false" />   &lt;!&ndash; for twemproxy &ndash;&gt;-->
     </bean>
@@ -29,8 +30,8 @@
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
           p:hostName="${redis.session.server}" p:port="${redis.session.port}" p:database="0"
           p:usePool="true">
-        <property name="poolConfig" ref="redisPoolConfig" />
+        <property name="poolConfig" ref="redisPoolConfig"/>
     </bean>
     <bean id="sessionCli" class="org.springframework.data.redis.core.StringRedisTemplate"
-          p:connectionFactory-ref="redisFactoryForSession" />
+          p:connectionFactory-ref="redisFactoryForSession"/>
 </beans>

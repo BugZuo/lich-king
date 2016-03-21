@@ -4,12 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
-                  value="${mysql.master.url}" />
-        <property name="username" value="${mysql.master.username}" />
-        <property name="password" value="${mysql.master.pwd}" />
-        <property name="defaultAutoCommit" value="true" />
+                  value="${mysql.master.url}"/>
+        <property name="username" value="${mysql.master.username}"/>
+        <property name="password" value="${mysql.master.pwd}"/>
+        <property name="defaultAutoCommit" value="true"/>
         <property name="maxActive" value="10"/>
         <property name="initialSize" value="1"/>
         <property name="maxWait" value="60000"/>
@@ -21,11 +21,11 @@
     </bean>
 
     <bean id="dataSourceSlave1" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="${mysql.slave1.url}" />
-        <property name="username" value="${mysql.slave1.username}" />
-        <property name="password" value="${mysql.slave1.pwd}" />
-        <property name="defaultAutoCommit" value="true" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${mysql.slave1.url}"/>
+        <property name="username" value="${mysql.slave1.username}"/>
+        <property name="password" value="${mysql.slave1.pwd}"/>
+        <property name="defaultAutoCommit" value="true"/>
         <property name="maxActive" value="10"/>
         <property name="initialSize" value="1"/>
         <property name="maxWait" value="60000"/>
@@ -37,11 +37,11 @@
     </bean>
 
     <bean id="dataSourceSlave2" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="${mysql.slave2.url}" />
-        <property name="username" value="${mysql.slave2.username}" />
-        <property name="password" value="${mysql.slave2.pwd}" />
-        <property name="defaultAutoCommit" value="true" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${mysql.slave2.url}"/>
+        <property name="username" value="${mysql.slave2.username}"/>
+        <property name="password" value="${mysql.slave2.pwd}"/>
+        <property name="defaultAutoCommit" value="true"/>
         <property name="maxActive" value="10"/>
         <property name="initialSize" value="1"/>
         <property name="maxWait" value="60000"/>
@@ -52,42 +52,44 @@
         <property name="testWhileIdle" value="false"/>
     </bean>
 
-    <bean id="routerDataSource" class="com.zuozuo.data.RouterDataSource">
+    <bean id="routerDataSource" class="com.flyzfq.lich.common.data.RouterDataSource">
         <constructor-arg>
             <map>
-                <entry key-ref="dataSourceSlave1" value="10" />
-                <entry key-ref="dataSourceSlave2" value="10" />
+                <entry key-ref="dataSourceSlave1" value="10"/>
+                <entry key-ref="dataSourceSlave2" value="10"/>
             </map>
         </constructor-arg>
     </bean>
 
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="transactionTemplate"
           class="org.springframework.transaction.support.TransactionTemplate">
-        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath:com/zuozuo/model/user/BaseUserMapper.xml" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations"
+                  value="classpath*:com/flyzfq/lich/model/**/*Mapper.xml"/>
     </bean>
 
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    <bean id="writeTpl" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
     <bean id="sqlSessionFactoryReadOnly" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="routerDataSource" />
-        <property name="mapperLocations" value="classpath:com/zuozuo/model/user/BaseUserMapper.xml" />
+        <property name="dataSource" ref="routerDataSource"/>
+        <property name="mapperLocations"
+                  value="classpath*:com/flyzfq/lich/model/**/*Mapper.xml"/>
     </bean>
 
     <bean id="readTpl" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryReadOnly" />
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryReadOnly"/>
     </bean>
 
-    <bean id="userDAO" class="com.zuozuo.dao.user.UserDAO" />
+    <bean id="userDAO" class="com.flyzfq.lich.dao.impl.user.UserDAOImpl"/>
 </beans>
