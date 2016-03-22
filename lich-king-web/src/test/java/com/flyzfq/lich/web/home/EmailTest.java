@@ -1,6 +1,6 @@
-package com.flyzfq.home;
+package com.flyzfq.lich.web.home;
 
-import com.flyzfq.BaseTest;
+import com.flyzfq.lich.BaseTest;
 
 import org.junit.Test;
 import org.springframework.mail.SimpleMailMessage;
