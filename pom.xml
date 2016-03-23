@@ -9,11 +9,25 @@
     <name>lich-king</name>
     <url>http://maven.apache.org</url>
 
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>nexus</name>
+            <url>http://115.28.235.26:8081/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <modules>
         <module>lich-king-model</module>
+        <module>lich-king-common</module>
         <module>lich-king-dao</module>
         <module>lich-king-service</module>
         <module>lich-king-web</module>
-        <module>lich-king-common</module>
     </modules>
 </project>
