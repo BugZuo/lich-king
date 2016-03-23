@@ -2,6 +2,7 @@ package com.flyzfq.lich.biz.security;
 
 import com.flyzfq.lich.model.user.LoginUser;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -9,8 +10,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class LoginUtil {
   public static LoginUser getLoginUser() {
-    LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication();
-    if (loginUser == null || loginUser.getUserId() < 1) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (!(authentication.getPrincipal() instanceof LoginUser)) {
+      return null;
+    }
+    LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+    if (loginUser.getUserId() < 1) {
       return null;
     }
     return loginUser;
