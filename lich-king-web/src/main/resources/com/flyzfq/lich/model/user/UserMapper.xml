@@ -2,10 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.flyzfq.lich.model.user.pojo.BaseUserDO">
+<mapper namespace="UserMapper">
     <resultMap id="BaseUserDOResult" type="com.flyzfq.lich.model.user.pojo.BaseUserDO">
         <id property="id" column="id" javaType="long"/>
         <result property="username" column="username" javaType="String"/>
+        <result property="avatar" column="avatar" javaType="String" />
         <result property="firstName" column="first_name" javaType="String"/>
         <result property="lastName" column="last_name" javaType="String"/>
         <result property="email" column="email" javaType="String"/>
@@ -19,9 +20,20 @@
         <result property="status" column="status" javaType="int"/>
     </resultMap>
 
+    <parameterMap id="RegisterInfoDO" type="com.flyzfq.lich.model.user.pojo.RegisterInfoDO">
+        <parameter property="username" />
+        <parameter property="avatar" />
+        <parameter property="firstName" />
+        <parameter property="lastName" />
+        <parameter property="email" />
+        <parameter property="telephone" />
+        <parameter property="password" />
+    </parameterMap>
+
     <sql id="BASE_COLUMNS">
         id,
         username,
+        avatar,
         first_name,
         last_name,
         email,
@@ -35,21 +47,47 @@
         status
     </sql>
 
-    <select id="getById" parameterType="long" resultMap="BaseUserDOResult">
+    <select id="getByOneColumn" parameterType="map" resultMap="BaseUserDOResult">
         SELECT
         <include refid="BASE_COLUMNS"/>
         <![CDATA[
           FROM user
-          WHERE id = #{id}
+          WHERE ${columnName} = #{columnValue}
         ]]>
     </select>
 
-    <select id="getByUsername" parameterType="String" resultMap="BaseUserDOResult">
-        SELECT
-        <include refid="BASE_COLUMNS"/>
-        <![CDATA[
-            FROM user
-            WHERE username = #{username}
-        ]]>
-    </select>
+    <insert id="insert" parameterMap="RegisterInfoDO">
+        INSERT INTO user (
+          username,
+          avatar,
+          first_name,
+          last_name,
+          email,
+          telephone,
+          password,
+          last_login_time,
+          created_at,
+          status,
+          is_active,
+          is_staff,
+          is_superuser)
+        VALUES (
+          #{username},
+          #{avatar},
+          #{firstName},
+          #{lastName},
+          #{email},
+          #{telephone},
+          #{password},
+          NOW(),
+          NOW(),
+          0,
+          0,
+          0,
+          0
+        )
+        <selectKey keyColumn="id" keyProperty="id" resultType="long">
+          SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
 </mapper>

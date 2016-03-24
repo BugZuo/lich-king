@@ -12,6 +12,7 @@ public class LoginUser implements UserDetails {
 
   private long userId;
   private String username;
+  private String avatar;
   private String sessionId;
   private List<String> bindStatus;
   private int cookieAge;
@@ -29,6 +30,14 @@ public class LoginUser implements UserDetails {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public String getAvatar() {
+    return avatar;
+  }
+
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
   }
 
   public String getSessionId() {

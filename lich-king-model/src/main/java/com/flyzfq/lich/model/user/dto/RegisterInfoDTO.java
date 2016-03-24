@@ -1,11 +1,11 @@
-package com.flyzfq.lich.model.user;
+package com.flyzfq.lich.model.user.dto;
 
 import java.util.Date;
 
 /**
- * Created by bug on 15/11/30.
+ * Created by bug on 16/3/24.
  */
-public class BaseUser {
+public class RegisterInfoDTO {
   private long id;
   private String username;
   private String avatar;

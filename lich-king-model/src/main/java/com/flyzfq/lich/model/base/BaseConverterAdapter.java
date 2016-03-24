@@ -1,14 +1,14 @@
-package com.flyzfq.lich.web.assember;
+package com.flyzfq.lich.model.base;
 
 import com.google.common.collect.Lists;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 /**
- * Created by bug on 16/3/16.
+ * Created by bug on 16/3/24.
  */
 public class BaseConverterAdapter<DTOT, DOT> {
   protected static final ModelMapper modelMapper = new ModelMapper();

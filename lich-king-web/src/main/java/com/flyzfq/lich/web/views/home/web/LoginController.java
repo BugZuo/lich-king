@@ -5,7 +5,7 @@ import com.flyzfq.lich.biz.service.user.IUserCoreService;
 import com.flyzfq.lich.common.result.BaseResult;
 import com.flyzfq.lich.model.user.LoginUser;
 import com.flyzfq.lich.model.user.dto.BaseUserDTO;
-import com.flyzfq.lich.web.assember.user.UserDTOConverter;
+import com.flyzfq.lich.web.assember.user.ApiUserAssemberAdapter;
 import com.flyzfq.lich.web.dto.user.ApiBasicUserDTO;
 import com.flyzfq.lich.web.forms.LoginForm;
 
@@ -48,7 +48,7 @@ public class LoginController {
         loginForm.getUsername(), loginForm.getPassword());
     if (result.isSuccess()) {
       BaseUserDTO user = result.getResult();
-      ApiBasicUserDTO apiBasicUserDTO = UserDTOConverter.conv(user);
+      ApiBasicUserDTO apiBasicUserDTO = ApiUserAssemberAdapter.conv(user);
       model.addAttribute("login_user", apiBasicUserDTO);
       LoginUser loginUser = new LoginUser();
       loginUser.setUserId(user.getId());

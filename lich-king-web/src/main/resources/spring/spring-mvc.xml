@@ -103,7 +103,7 @@
 
     <bean id="serviceHandlerAspect" class="com.flyzfq.lich.biz.security.ServiceHandler" />
 
-    <aop:aspectj-autoproxy>
+    <aop:aspectj-autoproxy proxy-target-class="false">
         <aop:include name="serviceHandlerAspect" />
     </aop:aspectj-autoproxy>
 

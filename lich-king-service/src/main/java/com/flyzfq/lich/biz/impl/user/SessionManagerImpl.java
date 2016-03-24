@@ -7,6 +7,7 @@ import com.flyzfq.lich.model.user.LoginUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -94,6 +95,25 @@ public class SessionManagerImpl extends AbstractPreAuthenticatedProcessingFilter
   @Override
   protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
     return "";
+  }
+
+  public boolean removeSessionAndPurge(String sessionId, HttpServletResponse response) {
+    if (StringUtils.isBlank(sessionId)) {
+      return true;
+    } else {
+      sessionCli.opsForHash().delete(sessionId);
+      response.addCookie(this.purgeCookie("user_id"));
+      response.addCookie(this.purgeCookie("username"));
+      return true;
+    }
+  }
+
+  private Cookie purgeCookie(String key) {
+    Cookie cookie = new Cookie(key, (String)null);
+//    cookie.setDomain("/"); // TODO 域名设置
+    cookie.setPath("/");
+    cookie.setMaxAge(0);
+    return cookie;
   }
 
   private void loadSession(LoginUser loginUser, HttpServletRequest request) {

@@ -5,6 +5,8 @@ import com.flyzfq.lich.model.user.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by bug on 16/1/9.
  */
