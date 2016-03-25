@@ -1,7 +1,7 @@
 package com.flyzfq.lich.web.views.home.api;
 
-import com.flyzfq.lich.biz.impl.user.SessionManagerImpl;
 import com.flyzfq.lich.biz.security.LoginUtil;
+import com.flyzfq.lich.biz.service.user.ISessionManager;
 import com.flyzfq.lich.biz.service.user.IUserCoreService;
 import com.flyzfq.lich.common.result.BaseResult;
 import com.flyzfq.lich.common.web.APIStatus;
@@ -32,7 +32,7 @@ public class LoginApi {
   private IUserCoreService userCoreService;
 
   @Autowired
-  private SessionManagerImpl sessionManager;
+  private ISessionManager sessionManager;
 
   @RequestMapping(value = "login/", method = RequestMethod.POST)
   @ResponseBody

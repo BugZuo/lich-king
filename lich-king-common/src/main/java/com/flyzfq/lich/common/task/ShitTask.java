@@ -13,13 +13,8 @@ public class ShitTask {
 
   private static final Logger logger = LoggerFactory.getLogger(ShitTask.class);
 
-  public ShitTask() {
-    System.out.println("-----------------------    Holy Shit!   -----------------------");
-    logger.info("-----------------------    Holy Shit!   -----------------------");
-  }
-
   @Scheduled(cron = "0 0 1 * * ?")
   public void shitTask() {
-    System.out.println("shit!");
+    logger.info("I'm running the shit task to test the schedule.");
   }
 }

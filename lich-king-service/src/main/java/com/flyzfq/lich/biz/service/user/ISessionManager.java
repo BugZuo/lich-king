@@ -11,7 +11,9 @@ public interface ISessionManager {
   int REMEMBER_COOKIE_AGE = 1209600;
   int COOKIE_AGE = 86400;
 
-  public void saveSession(LoginUser loginUser);
+  void saveSession(LoginUser loginUser);
 
-  public void saveSessionAndSetCookie(LoginUser loginUser, HttpServletResponse response);
+  void saveSessionAndSetCookie(LoginUser loginUser, HttpServletResponse response);
+
+  boolean removeSessionAndPurge(String sessionId, HttpServletResponse response);
 }

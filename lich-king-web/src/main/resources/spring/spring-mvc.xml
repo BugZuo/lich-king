@@ -19,7 +19,7 @@
     <!-- 内容扫描路径 -->
     <!--<context:property-placeholder location="/WEB-INF/*.properties" />-->
     <context:component-scan base-package="com.flyzfq"/>
-
+    <aop:aspectj-autoproxy />
     <!--<bean id="test" class="MainController" />-->
     <context:annotation-config/>
 
@@ -103,6 +103,7 @@
 
     <bean id="serviceHandlerAspect" class="com.flyzfq.lich.biz.security.ServiceHandler" />
 
+    <!-- proxy-target-class 默认为false,使用JDK代理, true使用CGLib代理 -->
     <aop:aspectj-autoproxy proxy-target-class="false">
         <aop:include name="serviceHandlerAspect" />
     </aop:aspectj-autoproxy>

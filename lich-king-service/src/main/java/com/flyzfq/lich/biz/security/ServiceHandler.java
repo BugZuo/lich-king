@@ -14,37 +14,21 @@ import org.springframework.stereotype.Component;
 /**
  * Created by bug on 16/3/18.
  */
-@Aspect
 @Component
+@Aspect
 public class ServiceHandler {
 
   private static final Logger logger = LoggerFactory.getLogger(ServiceHandler.class);
 
-  @Pointcut("execution (public * com.flyzfq.lich.biz.impl.*.*(..))")
+  @Pointcut("execution (public * com.flyzfq.lich.biz.impl..*.*(..))")
   public void pointCut() {}
 
   @Around("pointCut()")
   public Object afterThrowing(ProceedingJoinPoint point) {
     try {
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
-      System.out.println("* * * * * * * * * * * * * * * * * * * *");
       return point.proceed();
     } catch (Throwable e) {
       logger.error("Error when execute service for " + point.getSignature(), e);
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
-      System.out.println("# # # # # # # # # # # # # # # # # # # #");
       return BaseResult.of(BaseResultCode.ERROR.getMessage(), BaseResultCode.ERROR.getCode());
     }
   }

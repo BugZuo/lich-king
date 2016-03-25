@@ -3,14 +3,14 @@ package com.flyzfq.lich.web.views;
 import com.flyzfq.lich.biz.service.cache.ICacheService;
 import com.flyzfq.lich.biz.service.user.IUserCoreService;
 import com.flyzfq.lich.common.result.BaseResult;
-import com.flyzfq.lich.model.user.BaseUser;
 import com.flyzfq.lich.model.user.dto.BaseUserDTO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -38,8 +38,8 @@ public class MainController {
 
   @RequestMapping(value = "mybatis/", method = RequestMethod.GET)
   @ResponseBody
-  public String mybatis() {
-    BaseResult<BaseUserDTO> result = userCoreService.getById(1);
+  public String mybatis(@RequestParam(value = "id") int id) {
+    BaseResult<BaseUserDTO> result = userCoreService.getById(id);
     BaseUserDTO userDTO = result.getResult();
     return "mybatis " + userDTO.getUsername() + " " + userDTO.getId();
   }
