@@ -102,7 +102,7 @@ public class SessionManagerImpl extends AbstractPreAuthenticatedProcessingFilter
     if (StringUtils.isBlank(sessionId)) {
       return true;
     } else {
-      sessionCli.opsForHash().delete(sessionId);
+      sessionCli.delete(sessionId);
       response.addCookie(this.purgeCookie("user_id"));
       response.addCookie(this.purgeCookie("username"));
       return true;

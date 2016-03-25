@@ -20,7 +20,8 @@ public class ServiceHandler {
 
   private static final Logger logger = LoggerFactory.getLogger(ServiceHandler.class);
 
-  @Pointcut("execution (public * com.flyzfq.lich.biz.impl..*.*(..))")
+  @Pointcut("execution (public * com.flyzfq.lich.biz.impl..*.*(..))"
+      + " && !execution (public * com.flyzfq.lich.biz.impl.user.SessionManagerImpl.*(..))")
   public void pointCut() {}
 
   @Around("pointCut()")
